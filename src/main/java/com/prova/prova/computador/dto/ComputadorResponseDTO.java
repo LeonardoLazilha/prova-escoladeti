@@ -12,4 +12,7 @@ public record ComputadorResponseDTO(
         Integer dataFabricacao,
         List<Periferico> perifericos
 ) {
+
+    public void setId(UUID id) {
+    }
 }

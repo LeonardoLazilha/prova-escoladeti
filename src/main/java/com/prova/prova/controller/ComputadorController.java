@@ -1,5 +1,6 @@
 package com.prova.prova.controller;
 
+import com.prova.prova.computador.Computador;
 import com.prova.prova.computador.ComputadorService;
 import com.prova.prova.computador.dto.ComputadorRequestDTO;
 import com.prova.prova.computador.dto.ComputadorResponseDTO;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @RequestMapping("/computador")
 @RequiredArgsConstructor
 @Validated
+@CrossOrigin(origins = "http://localhost:3000")
 public class ComputadorController {
 
     private final ComputadorService service;
@@ -33,16 +35,8 @@ public class ComputadorController {
         return ResponseEntity.ok(computadores);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ComputadorResponseDTO> findById(@PathVariable UUID id) {
-        ComputadorResponseDTO response = service.findById(id);
-        return ResponseEntity.ok(response);
-    }
-
     @PutMapping("/{id}")
-    public ResponseEntity<ComputadorResponseDTO> update(
-            @PathVariable UUID id,
-            @RequestBody @Validated ComputadorUpdateDTO computadorUpdate) {
+    public ResponseEntity<ComputadorResponseDTO> update(@PathVariable UUID id, @RequestBody @Validated ComputadorUpdateDTO computadorUpdate) {
         ComputadorResponseDTO response = service.update(id, computadorUpdate);
         return ResponseEntity.ok(response);
     }

@@ -1,10 +1,12 @@
 package com.prova.prova.periferico;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.prova.prova.computador.Computador;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.UUID;
 
@@ -22,11 +24,10 @@ public class Periferico {
     private String nome;
 
 
+    @Setter
     @ManyToOne
     @JoinColumn(name = "computador_id")
+    @JsonBackReference
     private Computador computador;
 
-    public void setComputador(Computador computador) {
-        this.computador = computador;
-    }
 }

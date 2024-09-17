@@ -25,13 +25,6 @@ public class ComputadorService {
     }
 
     @Transactional
-    public ComputadorResponseDTO findById(UUID id) {
-        Computador computador = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Computador não encontrado!"));
-        return new ComputadorResponseDTO(computador.getId(), computador.getNome(), computador.getCor(), computador.getDataFabricacao(), computador.getPerifericos());
-    }
-
-    @Transactional
     public List<ComputadorResponseDTO> findAll() {
         return repository.findAll()
                 .stream()
@@ -42,7 +35,7 @@ public class ComputadorService {
     @Transactional
     public ComputadorResponseDTO update(UUID id, ComputadorUpdateDTO computadorUpdate) {
         Computador computadorExistente = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Computador não encontrado!"));
+                .orElseThrow(() -> new RuntimeException("PC não encontrado!"));
 
         computadorExistente.setNome(computadorUpdate.nome());
         computadorExistente.setCor(computadorUpdate.cor());
@@ -54,7 +47,7 @@ public class ComputadorService {
     @Transactional
     public void delete(UUID id) {
         Computador computador = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Computador não encontrado!"));
+                .orElseThrow(() -> new RuntimeException("PC não encontrado!"));
         repository.delete(computador);
     }
 }

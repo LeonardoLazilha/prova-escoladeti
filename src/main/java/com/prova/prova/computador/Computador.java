@@ -1,5 +1,6 @@
 package com.prova.prova.computador;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.prova.prova.periferico.Periferico;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,18 +28,8 @@ public class Computador {
     @Column(name = "data_fabricacao")
     private Integer dataFabricacao;
 
-    @OneToMany(mappedBy = "computador", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "computador", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Periferico> perifericos;
-
-    public void addPeriferico(Periferico periferico) {
-        perifericos.add(periferico);
-        periferico.setComputador(this);
-    }
-
-    public void removePeriferico(Periferico periferico) {
-        perifericos.remove(periferico);
-        periferico.setComputador(null);
-    }
-
 
 }
